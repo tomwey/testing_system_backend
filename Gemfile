@@ -85,7 +85,7 @@ gem 'qiniu'
 gem 'carrierwave-qiniu', '0.2.3'
 
 # Bootstrap UI
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 # 分页
 gem 'will_paginate'
