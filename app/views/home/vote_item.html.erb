@@ -1,0 +1,95 @@
+<div class="container">
+  <%= image_tag 'vote-caption.jpg', class: 'vote-caption' %>
+  <div class="vote-box">
+    <h1 class="header"><%= @vote_item.name %></h1>
+    <p class="countdown">
+      <% if not @vote_item.started? %>
+      即将开始
+      <% elsif not @vote_item.ended? %>
+      正在投票
+      <% else %>
+      投票结束
+      <% end %>
+    </p>
+    
+    <% if not @vote_item.started? %>
+      <a onclick="startVote('<%= @vote_item.id %>')" class="start-vote-btn">开始投票</a>
+    <% elsif not @vote_item.ended? %>
+    
+    <% else %>
+      <p class="vote-result">投票结果: <%= @vote_item.vote_count %>票</p>
+    <% end %>
+    
+  </div>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  var voteTimer = null;
+  
+  var leftSeconds;
+  <% if @vote_item.end_time %>
+  leftSeconds = parseInt('<%= (@vote_item.end_time - Time.zone.now).to_i %>');
+  <% else %>
+  leftSeconds = 0;
+  <% end %>
+  
+  if (leftSeconds > 0) {
+    startTimer();
+  }
+  // alert(leftSeconds);
+  
+  function startVote(item_id) {
+    // if (leftSeconds <= 0) {
+    //   alert('投票已结束');
+    //   return;
+    // }
+    
+    if (voteTimer) return;
+    
+    // alert(item_id);
+    $.ajax({
+      url: '/vote/' + item_id + '/begin',
+      type: 'POST',
+      success: function(re) {
+        // alert(re);
+        
+        $('.start-vote-btn').hide();
+        
+        leftSeconds = parseInt(re);
+        
+        $('.countdown').html(leftSeconds);
+        
+        startTimer();
+      },
+      error: function(err) {
+        alert('启动投票失败~');
+      }
+    })
+    return false;
+  }
+  
+  function startTimer() {
+    if (voteTimer) {
+      removeTimer();
+    }
+    
+    voteTimer = setInterval(function() {
+      $('.countdown').html(--leftSeconds);
+      if (leftSeconds <= 0) {
+        removeTimer();
+        $('.countdown').html('投票结束');
+        setTimeout(function() {
+          window.location.href = '/votes/' + '<%= @vote_item.id %>' + '?ak=<%= SiteConfig.vote_ak %>';
+        }, 1200);
+        
+      }
+    }, 1000);
+  }
+  
+  function removeTimer() {
+    clearInterval(voteTimer);
+    voteTimer = null;
+  }
+</script>
+<% end %>

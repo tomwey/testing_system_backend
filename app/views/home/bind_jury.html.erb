@@ -1,0 +1,39 @@
+<div id="vote-wrap">
+  <div class="vote-login">
+    <h2>输入工号投票</h2>
+    
+    <div class="form-group">
+      <label for="emp_no"></label>
+      <input type="number" class="form-control" id="emp_no" placeholder="输入员工号">
+    </div>
+    <div class="alert alert-danger" role="alert" id="login-result" style="display:none;">
+      <!-- <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span> -->
+    </div>
+    
+    <button type="button" class="btn btn-success" onclick="bind();">登录</button>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  function bind() {
+    $.ajax({
+      url: '/vote/login_jury',
+      type: 'POST',
+      data: { emp_no: $('#emp_no').val() },
+      success: function(re) {
+        if (re == '1') {
+          window.location.href = '/vote/entry';
+        } else {
+          $('#login-result').text(re);
+          $('#login-result').show();
+        }
+      },
+      error: function(err) {
+        alert('服务器出错了~');
+      }
+    });
+  }
+</script>
+<% end %>

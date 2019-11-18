@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "工资申请资料") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row ['ID', '流水号', '工资金额', '兼职项目', '用户姓名', '支付宝姓名', '支付宝账号','结算日期', '确认发放时间', '申请发放时间', '状态']
+  
+  # each user is a row on your spreadsheet
+  @salaries.each do |o|
+    sheet.add_row [o.id, o.uniq_id + '  ', o.money, o.project ? "[编号:#{o.project.uniq_id}] #{o.project.title}" : '--', o.user ? "[#{o.user.try(:mobile)}] #{o.user.profile.try(:name)}" : '--', o.pay_name, o.pay_account, o.settle_times, o.payed_at ? o.payed_at.strftime('%Y-%m-%d %H:%M') : '--', o.created_at.strftime('%Y-%m-%d %H:%M'), o.state_name]
+  end
+end

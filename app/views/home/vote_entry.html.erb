@@ -1,0 +1,50 @@
+<div class="container">
+<% if @vote_item.blank? %>
+
+<div class="jumbotron">
+  <h1>投票即将开始...</h1>
+  <p class="lead">点击下方按钮，刷新一下试试~</p>
+  <p><a class="btn btn-lg btn-success" href="#" role="button" onclick="javascript: window.location.reload();">刷新一下</a></p>
+</div>
+
+<% else %>
+<div class="jumbotron vote-entry">
+  <h1><%= @vote_item.name %></h1>
+  <p>已投票数：<%= @vote_item.vote_count %></p>
+  <% if @is_voted %>
+    <p>谢谢，投票成功.</p>
+    <p><a class="btn btn-lg btn-success" href="#" role="button" onclick="javascript:window.location.reload();">继续下一轮投票</a></p>
+  <% else %>
+    <% if @vote_item.ended? %>
+      <p>投票已经结束了</p>
+      <p><a class="btn btn-lg btn-success" href="#" role="button" onclick="javascript:window.location.reload();">继续下一轮投票</a></p>
+    <% else %>
+      <p><a class="btn btn-lg btn-success" href="#" role="button" onclick="commit(<%= @vote_item.id %>);">投票</a></p>
+    <% end %>
+  <% end %>
+<% end %>
+</div>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  function commit(item_id) {
+    $.ajax({
+      url: '/vote/commit',
+      type: 'POST',
+      data: { id: item_id },
+      success: function(re) {
+        // if (re == '1') {
+          window.location.reload();
+        // } else {
+        //   alert(re);
+        //
+        // }
+      },
+      error: function(err) {
+        alert('服务器出错了~');
+      }
+    })
+  }
+</script>
+<% end %>

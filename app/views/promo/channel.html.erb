@@ -1,0 +1,171 @@
+<% if @channel.blank? %>
+推广渠道不存在
+<% else %>
+<% if @poster.blank? %>
+营销注册页不存在
+<% else %>
+<div class="login-wrapper" style="background: <%= @poster.bg_color %>" id="login-wrapper">
+  <div class="top-sec">
+    <%= image_tag @poster.top_img.url, class: 'top-img' %>
+    <% if @poster.loan_product %>
+    <!-- <div class="product-info">
+      <%= image_tag @poster.loan_product.logo.url(:large), class: 'logo' %>
+      <h2 class="name"><%= @poster.loan_product.name %></h2>
+    </div> -->
+    <% end %>
+  </div>
+  <div class="login-sec">
+    <div class="login-form">
+      <div class="input-box">
+        <input type="tel" v-model="mobile" placeholder="请输入手机号码">
+      </div>
+      <div class="input-box">
+        <input type="tel" v-model="code" placeholder="验证码" class="code">
+        <span class="code-btn" @click="getCode" :class="{readonly:disableBtn}" style="color: <%= @poster.bg_color %>">{{btnText}}</span>
+      </div>
+      <div class="submit-box" @click="commit" style="background: <%= @poster.bg_color %>"><%= @poster.btn_text.blank? ? '立即借款' : @poster.btn_text %></div>
+    </div>
+    
+  </div>
+  <% if @poster.bottom_img.present? %>
+  <div class="top-sec">
+    <%= image_tag @poster.bottom_img.url, class: 'top-img' %>
+  </div>
+  <% end %>
+</div>
+<% end %>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+  var appUrl = "<%= @poster.app_url %>";
+  var vue = new Vue({
+    el: "#login-wrapper",
+    data: {
+      mobile: '',
+      code: '',
+      timer: null,
+      seconds: 59,
+      disableBtn: false
+    },
+    mounted() {
+      this.reset();
+    },
+    beforeDestroy() {
+      // console.log("ddddd");
+      this.reset();
+    },
+    computed: {
+      btnText() {
+        if (this.seconds <= 0) {
+          return "获取验证码";
+        } else {
+          return `${this.seconds}秒`;
+        }
+      }
+    },
+    methods: {
+      reset() {
+        if (this.timer) {
+          clearInterval(this.timer);
+        }
+        // this.seconds = 59;
+        this.seconds = 0;
+        this.disableBtn = false;
+        // this.btnText = "获取验证码";
+        this.timer = null;
+      },
+      createTimer() {
+        if (!this.timer) {
+          this.seconds = 59;
+          this.timer = setInterval(() => {
+            this.seconds--;
+            if (this.seconds === 0) {
+              // this.canGetCode = true;
+              this.reset();
+            }
+          }, 1000);
+        }
+      },
+      getCode() {
+        if (this.disableBtn) return;
+        
+        if (!this.mobile) {
+          alert("手机号不能为空");
+          return;
+        }
+        
+        var reg = new RegExp(/^1[3456789]\d{9}$/);
+        if (!reg.test(this.mobile)) {
+          alert("手机号不正确");
+          return;
+        }
+        
+        let that = this;
+        
+        var i = SBUtils.getRandomString(8);
+        var ak = SBUtils.getAccessKey(i);
+        
+        axios.post('http://fcz.weikedingxing.com/api/v1/auth_codes', { i: i, ak: ak, mobile: this.mobile })
+          .then(res => {
+            // console.log(res);
+            const result = res.data;
+            if (result.code == 0) {
+              // 获取验证码成功，
+              that.disableBtn = true;
+              // 启动定时器
+              that.createTimer();
+            } else {
+              alert(result.message);
+            }
+          })
+          .catch(error => {
+            alert("服务器超时，请重试");
+          });
+      },
+      commit() {
+        if (!this.mobile) {
+          alert("手机号不能为空");
+          return;
+        }
+        
+        var reg = new RegExp(/^1[3456789]\d{9}$/);
+        if (!reg.test(this.mobile)) {
+          alert("手机号不正确");
+          return;
+        }
+        
+        if (!this.code) {
+          alert("验证码不能为空");
+          return;
+        }
+        
+        let that = this;
+        
+        var i = SBUtils.getRandomString(8);
+        var ak = SBUtils.getAccessKey(i);
+        
+        var chn_id = "<%= @channel.try(:uniq_id) || '' %>";
+        
+        axios.post('http://fcz.weikedingxing.com/api/v1/account/login', { i: i, ak: ak, mobile: this.mobile, code: this.code, chn_id: chn_id })
+          .then(res => {
+            // console.log(res);
+            const result = res.data;
+            if (result.code == 0) {
+              if (appUrl) {
+                window.location.href = appUrl;
+              } else {
+                alert("登录成功");
+              }
+            } else {
+              alert(result.message);
+            }
+          })
+          .catch(error => {
+            alert("服务器超时，请重试");
+          });
+      }
+    }
+  });
+</script>
+<% end %>

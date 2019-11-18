@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "用户资料") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row ['ID', '用户ID', '姓名', '登录手机', '身份证', '电话', '性别', '生日', '是否在读', '学校', '专业', '账号注册时间']
+  
+  # each user is a row on your spreadsheet
+  @profiles.each do |o|
+    sheet.add_row [o.id, o.user.try(:uid), o.name, o.user.try(:mobile), o.idcard + '  ', o.phone, o.sex, o.birth, o.is_student ? '在读' : '--', o.college, o.specialty, o.user ? o.user.try(:created_at).strftime('%Y-%m-%d %H:%M') : '--']
+  end
+end

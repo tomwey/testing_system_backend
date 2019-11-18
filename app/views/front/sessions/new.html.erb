@@ -1,0 +1,10 @@
+<div class="login-box">
+  <div class="container">
+    <%= simple_form_for :sessions, { url: :front_do_login, method: :post } do |f| %>
+    <%= f.input :mobile, placeholder: '输入11位手机号', label: '手机号',input_html: { type: 'number' } %>
+    <%= f.input :code, placeholder: '输入手机验证码', label: '验证码', input_html: { type: 'number', style: 'width: 120px;' } %>
+    <button type="button" class="btn btn-default btn-primary code-btn" onclick="App.getCode(this);">获取验证码</button>
+    <%= f.submit '登录', class: 'btn btn-success btn-block submit-btn' %>
+    <% end %>
+  </div>
+</div>

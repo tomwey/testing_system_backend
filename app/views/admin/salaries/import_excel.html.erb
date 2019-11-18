@@ -1,0 +1,22 @@
+<p class="active_admin_import_hint">
+   文件导入格式为：'姓名','电话','工资总计'
+</p>
+
+<%= form_tag do_import_excel_admin_salaries_path, class: 'formtastic active_admin_import_model', id: 'new_active_admin_import_model', enctype: "multipart/form-data", 'accept-charset' => 'UTF-8', method: 'POST' do %>
+  <fieldset class="inputs">
+    <legend><span>请您选择要上传的文件</span></legend>
+    <ol>
+      <li class="file input optional" id="active_admin_import_model_file_input">
+        <label for="active_admin_import_model_file" class="label">文件</label>
+        <input id="active_admin_import_model_file" type="file" name="salary_file">
+      </li>
+    </ol>
+  </fieldset>    
+  <fieldset class="actions">
+    <ol>
+      <li class="action input_action " id="active_admin_import_model_submit_action">
+        <input type="submit" name="commit" value="导入" data-disable-with="请稍等...">
+      </li>
+    </ol>
+  </fieldset>
+<% end %>

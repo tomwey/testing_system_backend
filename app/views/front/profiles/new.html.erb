@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="login-box">
+    <%= simple_form_for([:front, @profile], html: { class: "form-horizontal" },wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean
+          }) do |f| %>
+    <%= f.input :name, label: '姓名' %>
+    <%= f.input :sex, as: :radio_buttons, collection: ['男', '女'], label: '性别' %>
+    <%= f.input :idcard, label: '身份证' %>
+    <%= f.input :birth, label: '生日' %>
+    <%= f.input :phone, label: '电话' %>
+    <%= f.input :is_student, as: :boolean, label: '是否在读' %>
+    <%= f.input :college, label: '学校' %>
+    <%= f.input :specialty, label: '专业' %>
+    <%= f.submit '提交', class: 'btn btn-success btn-block' %>
+    <% end %>
+  </div>
+  
+</div>

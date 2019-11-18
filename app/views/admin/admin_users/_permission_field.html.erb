@@ -1,0 +1,28 @@
+<li class="check_boxes input optional" id="admin_user_permission_ids_input">
+  <fieldset class="choices">
+    <legend class="label">
+      <label>权限设置</label>
+    </legend>
+    <input type="hidden" name="admin_user[permission_ids][]" id="admin_user_permission_ids_none" value="">
+    <ol class="choices-group">
+      <% 
+      @my_permissions = f.object.permissions.pluck(:id)
+       %>
+      <% PermissionResource.where(opened: true).order('sort asc').each do |pr| %>
+      
+      <li class="choice" style="margin-bottom: 20px;">
+        <p class="help-text" style="margin: 0; padding: 0; margin-top: 8px;margin-bottom: 5px;font-weight: bold;"><%= pr.func_name %></p>
+        
+        <% pr.permissions.each do |p| %>
+        <label for="admin_user_permission_ids_<%= p.id %>">
+          <%= f.check_box_tag 'admin_user[permission_ids][]', "#{p.id}", @my_permissions.include?(p.id), id: "admin_user_permission_ids_#{p.id}" %>
+          <!-- <input type="checkbox" name="admin_user[permission_ids][]" id="admin_user_permission_ids_<%= p.id %>" value="<%= p.id %>" checked="<%= f.object.permissions.pluck(:id).include?(p.id) ? 'checked' : '' %>"> --><%= p.action_name %></label>&emsp;&emsp;
+          <% end %>
+          
+      </li>
+      
+      <% end %>
+    </ol>
+  </fieldset>
+
+</li>

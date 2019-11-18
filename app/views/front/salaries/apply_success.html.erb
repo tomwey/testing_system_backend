@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>工资发放申请提交成功！</h1>
+    <p class="lead">我们会尽快将工资发放到您的<span style="color: red;">支付宝账号: [<%= "#{current_user.current_pay_name} #{current_user.current_pay_account}" %>]</span>，请注意查收。</p>
+    <p><%= link_to '继续发放工资', new_front_salary_path, class: 'btn btn-lg btn-success' %></p>
+  </div>
+</div>

@@ -1,0 +1,502 @@
+"zh-CN":
+  common:
+    super_admin: '管理员'
+    admin: '管理员'
+    site_editor: '站点编辑'
+    marketer: '市场人员'
+    limited_user: '普通管理员'
+    approved: '已审核'
+    rejected: '已拒绝'
+    pending: '待审核'
+    progressing: '进行中'
+    canceled: '已取消'
+    completed: '已结束'
+    grab_tip: '无'
+    open: '打开'
+    close: '关闭'
+    # SignRule:
+    #   title: '口令红包'
+    #   grab_tip: '注意：只有一次答题的机会！'
+    #   action: '提交口令抢红包'
+  activerecord:
+    models:
+      user: "用户"
+      user_session: '用户会话'
+      user_device: '用户设备'
+      admin: "管理员"
+      cpanel: '后台系统' # 此处并不存在真正意义的model，只是为了后台系统的面包屑导航根地址国际化成中文
+      banner: '广告'
+      site_config: "站点配置"
+      page: '网页文档'
+      merchant: '商家'
+      common_config: '系统设置'
+      game_config: '游戏配置'
+      withdraw: '提现'
+      charge: '充值'
+      trade_log: '交易记录'
+      page: '网页'
+      attachment: '附件'
+      message_template: '消息模板'
+      message: '消息'
+      admin_user: '后台管理员账号'
+      recharge: '充值'
+      pay_log: '交易明细'
+      area: '区域'
+      catalog: '分类'
+      salary: '工资发放申请'
+      project: '兼职'
+      profile: '用户资料'
+      permission_resource: '权限资源'
+      permission: '权限点'
+      tag: '分类标签'
+      api_config: 'API密钥'
+      sys_func: '功能模块'
+      sys_action: '功能操作'
+      sys_price_version: '系统套餐'
+      sys_version_func_action: '系统套餐功能清单'
+      company: '公司机构'
+      account: '机构账号'
+      role: '机构角色'
+      school: '校区'
+      parent: '家长'
+      student: '学生'
+      outcome: '作品'
+    attributes:
+      user:
+        uid: '用户ID'
+        mobile: '手机'
+        name: '姓名'
+        idcard: '身份证'
+        from_chn_id: '注册渠道'
+        channel: '注册渠道'
+        nickname: '昵称'
+        avatar: '头像'
+        bio: '简介'
+        wx_id: '微信ID'
+        bank_no: '银行卡号'
+        bank_mobile: '银行预留手机'
+        bank_info: '银行卡信息'
+        wx_avatar: '微信头像'
+        balance: '余额'
+        earn: '总收入'
+        private_token: 'TOKEN'
+        verified: '是否启用账号'
+        created_at: '注册时间'
+        total_prize_count: '抽奖总次数'
+        prized_count: '抽过的次数'
+      profile:
+        name: '姓名'
+        sex: '性别'
+        birth: '生日'
+        phone: '电话'
+        idcard: '身份证'
+        is_student: '是否在读'
+        college: '学校'
+        specialty: '专业'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      api_config:
+        appid: 'APPID'
+        name: '名称'
+        prv_key: '私钥'
+        pub_key: '公钥'
+        opened: '是否启用'
+        created_at: '创建时间'
+      sys_func:
+        name: '模块中文名称'
+        func_name: '模块名'
+        code: '模块代码'
+        opened: '是否启用'
+        sort: '显示顺序'
+        memo: '备注'
+      sys_action:
+        name: '操作中文名称'
+        action_name: '操作名'
+        code: '操作代码'
+        opened: '是否启用'
+        sort: '显示顺序'
+        memo: '备注'
+      sys_price_version:
+        name: '套餐名称'
+        func_desc: '功能介绍'
+        limits: '使用限制策略'
+        price: '价格(元/年)'
+        opened: '是否上架'
+        sort: '排序'
+      sys_version_func_action:
+        ver_id: '所属套餐'
+        func_id: '所属模块'
+        action_id: '所属操作'
+      company:
+        name: '公司名字'
+        brand: '品牌名字'
+        logo: 'LOGO'
+        mobile: '联系人手机'
+        license_no: '统一社会信用代码'
+        license_image: '营业执照'
+        address: '公司地址'
+        vip_expired_at: '账号过期时间'
+        balance: '余额(分)'
+        opened: '是否启用'
+        memo: '备注'
+        pid: '所属父机构'
+      role:
+        name: '名字'
+        id: 'ID'
+        opened: '是否启用'
+        memo: '备注'
+        company_id: '所属机构'
+        company: '所属机构'
+        
+      account:
+        name: '账号名'
+        mobile: '登录手机'
+        password: '登录密码'
+        avatar: '头像'
+        opened: '是否启用账号'
+        is_admin: '是否是超级管理员'
+        created_at: '创建时间'
+        id: '账号ID'
+      school:
+        name: '名字'
+        address: '详细地址'
+      parent:
+        mobile: '手机号'
+        name: '名字'
+      student:
+        name: '名字'
+        mobile: '手机号'
+      outcome:
+        name: '名字'
+        cover: '封面图'
+        intro: '简介'
+        body: '详细介绍'
+        student_id: '学生'
+        student: '学生'
+        
+      permission_resource:
+        id: 'ID'
+        func_name: '资源中文名'
+        func_class: '资源类名(class)'
+        actions: '权限功能'
+        action_names: '权限功能中文名'
+        sort: '排序'
+        opened: '是否开启'
+      permission:
+        action: '权限操作'
+        action_name: '权限操作中文名'
+        memo: '备注'
+        need_scope: '是否要限制账号范围'
+      tag:
+        name: '名字'
+        memo: '备注'
+        sort: '排序'
+      promo_poster:
+        name: '名字'
+        product_id: '所属产品'
+        top_img: '顶部图片'
+        bottom_img: '底部图片'
+        bg_color: '背景颜色值'
+        btn_text: '按钮文本'
+        app_url: 'APP下载地址'
+        opened: '是否上线'
+      channel:
+        uniq_id: '渠道号'
+        name: '渠道名字'
+        poster_id: '所属营销注册页面'
+        opened: '是否上线'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      loan_speed:
+        name: '名字'
+        score: '分值权重(越小放款越快)'
+        opened: '是否打开'
+      loan_product:
+        uniq_id: 'ID'
+        name: '名字'
+        logo: 'LOGO'
+        min_money: '最小借款额度(元)'
+        max_money: '最大借款额度(元)'
+        min_length: '最小借款期限'
+        max_length: '最大借款期限'
+        length_type: '借款期限类型'
+        intro: '贷款简介'
+        pass_rate: '贷款审批通过率(%)'
+        loan_rate: '贷款利率(%)'
+        loan_rate_type: '贷款利率类型'
+        body_url: '贷款产品推广链接'
+        body: '贷款详情介绍'
+        speed: '放款速度'
+        tags: '所属标签'
+        conditions: '贷款申请条件'
+        view_count: '浏览数'
+        order_count: '申请人数'
+        opened_at: '上线时间'
+        deleted_at: '删除时间'
+        sort: '显示顺序'
+      loan_condition:
+        icon: '图标'
+        name: '名字'
+        sort: '排序'
+      loan_apply:
+        name: '姓名'
+        idcard: '身份证号'
+        money: '贷款金额'
+        duration: '贷款期限'
+        loan_type: '贷款类型'
+        credit_status: '信用情况'
+        job: '职业身份'
+        salary_type: '工资发放形式'
+        salary: '银行卡发放工资'
+        work_length: '当前单位工龄'
+        other_info: '持有资料'
+      bank:
+        icon: 'LOGO'
+        name: '名字'
+        sort: '排序'
+        phone: '电话'
+        products_url: '产品页面地址'
+        home_url: '官网地址'
+      credit_card:
+        bank_id: '所属银行'
+        cover: '卡封面'
+        name: '名字'
+        intro: '简介'
+        special: '特殊说明'
+        apply_url: '申请推广链接'
+        view_count: '浏览数'
+        apply_count: '申请数'
+        opened: '是否上线'
+        sort: '显示顺序'
+      message:
+        message_template_id: '所属模板'
+        content: '内容'
+        link: '消息链接地址'
+        to_users: '消息接收人'
+      project:
+        id: '#'
+        uniq_id: '编号'
+        title: '兼职简介'
+        begin_date: '开始日期'
+        end_date: '截止日期'
+        body: '兼职描述'
+        money: '工资金额'
+        opened: '是否打开'
+        sort: '显示顺序'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      
+      banner:
+        image: '封面图'
+        link: '链接地址'
+        sort: '显示顺序'
+        opened: '是否上线'
+        title: '标题'
+        page_types: '投放板块'
+      message_template:
+        tpl_id: '模板ID'
+        title: '标题'
+        body: '内容'
+        body_demo: '使用示例'
+        opened: '是否使用'
+      page:
+        title: '标题'
+        body:  '内容'
+        slug:  '文档标识'
+      common_config:
+        key: '配置名'
+        value: '配置值'
+        description: '配置说明'
+      job:
+        uniq_id: 'ID'
+        title: '标题'
+        body: '详细介绍'
+        company: '所属公司'
+        price: '兼职价格'
+        work_start_date: '工作开始日期'
+        work_end_date: '工作结束日期'
+        work_length: '工期'
+        opened: '是否上架'
+        sort: '显示顺序'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      job_task:
+        content: '任务内容'
+        job_id: '分配兼职'
+        agent_user_id: '所属代理'
+      agent_user:
+        uniq_id: 'ID'
+        name: '代理人名字'
+        mobile: '代理人手机'
+        address: '代理人地址'
+        parent_id: '父级代理人'
+        level: '代理人级别'
+        source: '来源'
+        star: '活跃程度'
+        parent: '上级代理'
+        balance: '余额'
+        earnings: '总收入'
+        earn_ratio: '收入提成比例配置'
+        blocked_at: '禁用时间'
+        note: '备注'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      agent_config:
+        key: '配置名称'
+        value: '配置值'
+        description: '配置说明'
+      agent_earn_bill:
+        uniq_id: 'ID'
+        agent_user_id: '所属代理商'
+        money: '提成金额'
+        earn_ratio: '提成比例'
+        from_agent_user_id: '下级代理商'
+        uid: '用户ID'
+        created_at: '创建时间'
+      attachment:
+        data: '文件'
+        uniq_id: 'ID'
+      message:
+        title: '标题'
+        content: '内容'
+        to: '用户'
+        read_at: '已读时间'
+        created_at: '创建时间'
+      
+      withdraw:
+        oid: '流水号'
+        money: '金额'
+        fee: '手续费'
+        account_no: '账号'
+        account_name: '提现人'
+        user_id: '所属用户'
+        payed_at: '支付时间'
+      charge:
+        uniq_id: '流水号'
+        money: '金额'
+        user_id: '所属用户'
+        payed_at: '到账时间'
+        ip: 'IP'
+      trade_log: 
+        user_id: '用户'
+        created_at: '交易时间'
+        money: '金额'
+        title: '交易说明'
+        tradeable: '交易对象'
+        
+      site_config:
+        key: "配置名称"
+        value: "配置值"
+        description: "配置说明"
+      admin:
+        email: "邮箱"
+        password: "密码"
+        current_password: "旧密码"
+        password_confirmation: "确认密码"
+        current_sign_in_at: "最新登录时间"
+        sign_in_count: "登录次数"
+        created_at: "创建时间"
+        role: "角色"
+      merchant:
+        name: '名称'
+        mobile: '联系电话'
+        address: '地址'
+        note: '备注'
+        avatar: '头像'
+        intro: '简介'
+        auth_type: '认证方式'
+        verified: '是否有效'
+        password: '密码'
+        password_confirmation: '确认密码'
+        login_in_count: '登录次数'
+      media_history:
+        title: '资源名字'
+        source_url: '资源地址'
+        progress: '进度'
+        uniq_id: 'ID'
+        uid: '用户'
+        mp_id: '提供者'
+        created_at: 'at'
+      page:
+        title: '标题'
+        body:  '内容'
+        slug:  '文档标识'
+      admin_user:
+        email: '邮箱'
+        password: '密码'
+        password_confirmation: '确认密码'
+        current_sign_in_at: '最新登录时间'
+        sign_in_count: '登录次数'
+        created_at: '创建时间'
+      area:
+        address: '详细地址'
+        location: '位置坐标'
+        range: '限制范围'
+      catalog:
+        name: '名称'
+        sort: '显示顺序'
+        opened: '是否使用'
+      salary:
+        id: 'ID'
+        uniq_id: '流水号'
+        money: '工资金额(元)'
+        pay_name: '支付宝账号姓名'
+        pay_account: '支付宝账号手机'
+        payed_at: '发放时间'
+        created_at: '申请时间'
+        project: '兼职项目'
+        user: '申请人'
+    errors:
+      models:
+        user: "用户"
+        admin: "管理员"
+        category: "类别"
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        not_an_integer: "必须是整数"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        record_invalid: "校验失败: %{errors}"
+        taken:
+          已占用
+        document_not_found:
+          没有发现类是 %{klass} ID 是 %{identifiers} 的文档
+        invalid_database:
+          数据库应该是Mongo::DB,而不是%{name}.
+        invalid_type:
+          在类%{klass}中定义了字段,实际值是%{value}的%{other}.
+        unsupported_version:
+          MongoDB %{version} 版本已过期，请升级到 %{mongo_version}.
+        validations:
+          校验失败 - %{errors}.
+        invalid_collection:
+          不允许直接访问嵌入式的集合%{klass} , 请从文档的根访问集合.
+        invalid_field:
+          字段的名字不允许为 %{name}. 你不应该定义跟Mongoid内部属性或者方法相同的名字，详细请看Use Document#instance_methods.
+        too_many_nested_attribute_records:
+          被关联的%{association} 嵌入式属性不能超过 %{limit}.
+        embedded_in_must_have_inverse_of:
+          embedded_in的关联属性必须包含inverse_of.
+        dependent_only_references_one_or_many:
+          dependent => destroy|delete 选项只有在references_one或者references_many时候有效.
+        association_cant_have_inverse_of:
+          在当前的关联中，不允许定义inverse_of去,其只有在embedded_in或者references_many是数组的情况下使用
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
