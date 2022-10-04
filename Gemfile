@@ -82,7 +82,7 @@ gem 'posix-spawn'
 gem 'qiniu'
 
 # gem 'mqtt', github: 'njh/ruby-mqtt'
-gem 'carrierwave-qiniu', '0.2.3'
+gem 'carrierwave-qiniu', '1.2.2'
 
 # Bootstrap UI
 gem 'bootstrap-sass', '~> 3.3.6'
